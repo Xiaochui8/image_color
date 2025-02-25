@@ -14,6 +14,9 @@ class ColorDataset(Dataset):
                 transforms.ToTensor()
             ])
         self.transform = transform
+        self.gray_transform = transforms.Compose([
+                transforms.ToTensor()
+            ])
         self.images = os.listdir(self.color_dir)
         
     def __len__(self):
@@ -26,5 +29,5 @@ class ColorDataset(Dataset):
         color_image = Image.open(color_image_name)
         gray_image = Image.open(gray_image_name).convert('L')
         color_image = self.transform(color_image)
-        gray_image = self.transform(gray_image)
+        gray_image = self.gray_transform(gray_image)
         return gray_image, color_image
