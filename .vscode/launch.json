@@ -4,13 +4,37 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "name": "get_data",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/data/data_processer.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--image_folder", "D:\\Code\\2024_2\\ComputerVision\\image_color\\data\\image",
+                "--train_folder", "D:\\Code\\2024_2\\ComputerVision\\image_color\\data\\train",
+                "--valid_folder", "D:\\Code\\2024_2\\ComputerVision\\image_color\\data\\valid",
+                "--train_ratio", "0.9",
+                "--random_seed", "6657",
+            ]
+        },
         {
             "name": "test",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/test.py",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "train",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--num_epochs", "0",
+                "--pretrained_model", "model/image_color.pth",
+            ]
         }
     ]
 }

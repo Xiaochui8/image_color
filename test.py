@@ -1,5 +1,5 @@
 import torch
-import image_color
+import image_color.model as image_color
 from PIL import Image
 import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
@@ -14,8 +14,8 @@ if __name__ == '__main__':
     gray_image = transform(gray_image).unsqueeze(0).to(device) # (b, 1, h, w)
     
     model = image_color.ImageColorNet()
-    # model.load_state_dict(torch.load('model.pth'))
-    model = model.to(device)
+    model.load_state_dict(torch.load('model/image_color.pth'))
+    model = model.eval().to(device)
     
     image = model(gray_image)
     
