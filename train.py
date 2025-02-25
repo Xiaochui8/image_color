@@ -70,13 +70,14 @@ if __name__ == '__main__':
     if args.pretrained_model:
         model.load_state_dict(torch.load(args.pretrained_model))
     
-    train_dataset = face.ColorDataset(args.train_data_path, transform=transforms.Compose([
-        transforms.ToTensor()
-    ]))
+
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ])
+    train_dataset = face.ColorDataset(args.train_data_path, transform=transform)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    valid_dataset = face.ColorDataset(args.valid_data_path, transform=transforms.Compose([
-        transforms.ToTensor()
-    ]))
+    valid_dataset = face.ColorDataset(args.valid_data_path, transform=transform)
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=False)
     
     optimizer = optim.Adam(model.parameters(), lr=0.001)
