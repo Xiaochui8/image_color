@@ -5,10 +5,10 @@ from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
 from tqdm import tqdm
-import image_color.model as image_color
+import image_color.model_rgb as image_color
 import argparse
 import os
-import dataset.face as face
+import dataset.face_rgb as face_rgb
 
 
 class CustomLoss(nn.Module):
@@ -74,9 +74,9 @@ if __name__ == '__main__':
     transform = transforms.Compose([
         transforms.ToTensor(),
     ])
-    train_dataset = face.ColorDataset(args.train_data_path, transform=transform)
+    train_dataset = face_rgb.ColorDataset(args.train_data_path, transform=transform)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    valid_dataset = face.ColorDataset(args.valid_data_path, transform=transform)
+    valid_dataset = face_rgb.ColorDataset(args.valid_data_path, transform=transform)
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=False)
     
     optimizer = optim.Adam(model.parameters(), lr=0.001)

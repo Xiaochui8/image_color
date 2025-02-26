@@ -8,7 +8,7 @@ from tqdm import tqdm
 import image_color.model_Lab as image_color
 import argparse
 import os
-import dataset.face_Lab as face
+import dataset.face_Lab as face_Lab
 from skimage.color import lab2rgb
 from utils.Lab2rgb import Lab2rgb
 
@@ -77,9 +77,9 @@ if __name__ == '__main__':
         transforms.ToTensor(),
         # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
-    train_dataset = face.ColorDataset(args.train_data_path, transform=transform)
+    train_dataset = face_Lab.ColorDataset(args.train_data_path, transform=transform)
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
-    valid_dataset = face.ColorDataset(args.valid_data_path, transform=transform)
+    valid_dataset = face_Lab.ColorDataset(args.valid_data_path, transform=transform)
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=False)
     
     optimizer = optim.Adam(model.parameters(), lr=0.001)
