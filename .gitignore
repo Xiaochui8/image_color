@@ -4,3 +4,4 @@ __pycache__
 /model
 .vscode
 *.log
+!/data/test.jpg
